@@ -7,32 +7,20 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <header>
-        <h1>Customize Your T-Shirt</h1>
-    </header>
+    <h1>Customize Your T-shirt</h1>
+    
+    <!-- Display the T-shirt attributes (color, GSM, type) -->
+    <div id="tshirt-attributes"></div>
 
-    <main>
-        <section id="tshirt-preview">
-            <canvas id="tshirtCanvas" width="400" height="400"></canvas>
-        </section>
+    <!-- T-shirt design area -->
+    <canvas id="tshirtCanvas" width="400" height="400"></canvas>
 
-        <section id="upload-section">
-            <input type="file" id="uploadDesign" accept="image/*">
-            <button id="uploadButton">Upload Design</button>
-        </section>
+    <!-- Image upload for design -->
+    <input type="file" id="uploadDesign">
+    <button id="uploadButton">Upload Design</button>
 
-        <button id="checkoutButton">Proceed to Checkout</button>
-    </main>
-
-    <footer>
-        <p>&copy; 2024 Custom T-Shirts Store</p>
-    </footer>
-
-    <script src="script.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/4.5.0/fabric.min.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/4.6.0/fabric.min.js"></script>
-<script src="script2cutomize.js"></script>
+    <!-- Fabric.js for handling canvas and design placement -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/4.6.0/fabric.min.js"></script>
+    <script src="script2cutomize.js"></script>
 </body>
 </html>
-
-
