@@ -1,33 +1,35 @@
-// Rendering the selected T-shirt attributes on the customization page
-document.addEventListener('DOMContentLoaded', function() {
-    const color = localStorage.getItem('tshirt-color');
-    const gsm = localStorage.getItem('tshirt-gsm');
-    const type = localStorage.getItem('tshirt-type');
+document.getElementById('payButton').addEventListener('click', function(e) {
+    e.preventDefault();
 
-    // Set the T-shirt color as the canvas background
-    document.getElementById('tshirtCanvas').style.backgroundColor = color;
+    // Collect shipping details
+    var name = document.getElementById('name').value;
+    var address = document.getElementById('address').value;
+    var phone = document.getElementById('phone').value;
+    var email = document.getElementById('email').value;
 
-    // Display selected attributes
-    document.getElementById('tshirt-attributes').innerHTML = `
-        Color: ${color}, GSM: ${gsm}, Type: ${type}
-    `;
-});
+    // Razorpay options for payment
+    var options = {
+        "key": "rzp_test_ibuaNsCnRcHdbx",  // Your Razorpay Test Key ID
+        "amount": 1,  // Amount in paise (50000 paise = INR 500)
+        "currency": "INR",
+        "name": "Custom T-shirts Store",
+        "description": "T-shirt Purchase",
+        "image": "https://yourlogo.com/logo.png",  // Optional: Add your store logo
+        "handler": function (response) {
+            alert("Payment successful. Payment ID: " + response.razorpay_payment_id);
+            // You can save the payment details on the server here
+        },
+        "prefill": {
+            "name": name,
+            "email": email,
+            "contact": phone
+        },
+        "theme": {
+            "color": "#3399cc"
+        }
+    };
 
-// Create the canvas for T-shirt design
-var canvas = new fabric.Canvas('tshirtCanvas');
-
-// Allow users to upload and add their design to the T-shirt
-document.getElementById('uploadButton').addEventListener('click', function() {
-    var input = document.getElementById('uploadDesign');
-    if (input.files && input.files[0]) {
-        var reader = new FileReader();
-        reader.onload = function(e) {
-            fabric.Image.fromURL(e.target.result, function(img) {
-                img.scale(0.5);  // Adjust the scale
-                canvas.add(img); // Add the image to the canvas
-                img.set({ selectable: true });  // Allow moving and resizing
-            });
-        };
-        reader.readAsDataURL(input.files[0]);
-    }
+    // Open Razorpay Checkout
+    var rzp1 = new Razorpay(options);
+    rzp1.open();
 });
