@@ -39,3 +39,10 @@ footer {
     bottom: 0;
     width: 100%;
 }
+#tshirtCanvas {
+    border: 1px solid #ccc;
+    margin: 20px auto;
+    display: block;
+}
+
+
