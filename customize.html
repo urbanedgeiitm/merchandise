@@ -7,25 +7,34 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h1>Customize Your T-shirt</h1>
-    
-    <!-- Display the T-shirt attributes (color, GSM, type) -->
-    <div id="tshirt-attributes"></div>
+    <header>
+        <h1>Customize Your T-Shirt</h1>
+    </header>
 
-    <!-- T-shirt design area -->
-    <canvas id="tshirtCanvas" width="400" height="400"></canvas>
+    <main>
+        <section id="tshirt-preview">
+            <!-- The canvas for showing the T-shirt -->
+            <canvas id="tshirtCanvas" width="400" height="400"></canvas>
+        </section>
 
-    <!-- Image upload for design -->
-    <input type="file" id="uploadDesign">
-    <button id="uploadButton">Upload Design</button>
+        <section id="upload-section">
+            <!-- Input for uploading design -->
+            <input type="file" id="uploadDesign" accept="image/*">
+            <button id="uploadButton">Upload Design</button>
+        </section>
 
-    <!-- Proceed to checkout button -->
-    <button id="checkoutButton">Proceed to Checkout</button>
+        <!-- Button to proceed to checkout -->
+        <button id="checkoutButton">Proceed to Checkout</button>
+    </main>
 
-    <!-- Fabric.js for handling canvas and design placement -->
+    <footer>
+        <p>&copy; 2024 Custom T-Shirts Store</p>
+    </footer>
+
+    <!-- Include the fabric.js library for canvas handling -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/4.6.0/fabric.min.js"></script>
 
-    <!-- Custom JavaScript for T-shirt customization and redirecting to checkout -->
+    <!-- Custom JavaScript for handling T-shirt customization -->
     <script src="script2cutomize.js"></script>
 </body>
 </html>
