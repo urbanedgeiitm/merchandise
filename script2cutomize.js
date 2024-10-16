@@ -10,7 +10,7 @@ document.getElementById('payButton').addEventListener('click', function(e) {
     // Razorpay options for payment
     var options = {
         "key": "rzp_test_ibuaNsCnRcHdbx",  // Your Razorpay Test Key ID
-        "amount": 1,  // Amount in paise (50000 paise = INR 500)
+        "amount": 50000,  // Amount in paise (50000 paise = INR 500)
         "currency": "INR",
         "name": "Custom T-shirts Store",
         "description": "T-shirt Purchase",
