@@ -19,8 +19,32 @@
     <input type="file" id="uploadDesign">
     <button id="uploadButton">Upload Design</button>
 
+    <!-- Proceed to checkout button -->
+    <button id="checkoutButton">Proceed to Checkout</button>
+
     <!-- Fabric.js for handling canvas and design placement -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/4.6.0/fabric.min.js"></script>
+
+    <!-- Custom JavaScript for T-shirt customization and redirecting to checkout -->
     <script src="script2cutomize.js"></script>
+
+    <!-- Include Razorpay for payment (only for checkout page) -->
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+
+    <script>
+        // Example of how you might handle the button to proceed to checkout
+        document.getElementById('checkoutButton').addEventListener('click', function () {
+            // Store the current customization or designs in localStorage or a session
+            localStorage.setItem('tshirt-customization', JSON.stringify({
+                color: 'Selected Color',
+                gsm: 'Selected GSM',
+                type: 'Selected Type',
+                design: canvas.toDataURL() // Save the canvas with design as an image
+            }));
+            
+            // Redirect to checkout page
+            window.location.href = 'checkout.html';
+        });
+    </script>
 </body>
 </html>
