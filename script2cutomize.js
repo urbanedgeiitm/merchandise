@@ -1,25 +1,32 @@
 // Initialize Fabric.js canvas
 var canvas = new fabric.Canvas('tshirtCanvas');
 
-// Handle the design upload and placement
+// Load a basic T-shirt outline as the background (ensure this path is correct)
+fabric.Image.fromURL('images/tshirt.png', function(img) {
+    canvas.setBackgroundImage(img, canvas.renderAll.bind(canvas), {
+        scaleX: canvas.width / img.width,
+        scaleY: canvas.height / img.height
+    });
+});
+
+// Handle the image upload for customizing
 document.getElementById('uploadButton').addEventListener('click', function () {
     var input = document.getElementById('uploadDesign');
     if (input.files && input.files[0]) {
         var reader = new FileReader();
         reader.onload = function (e) {
-            // Load the uploaded image on the canvas
             fabric.Image.fromURL(e.target.result, function (img) {
-                img.scale(0.5); // Resize the image
-                canvas.add(img); // Add image to the canvas
+                img.scale(0.5);  // Adjust the scale as needed
+                canvas.add(img);  // Add the design to the canvas
             });
         };
         reader.readAsDataURL(input.files[0]);
     }
 });
 
-// Proceed to checkout button functionality
+// Proceed to checkout
 document.getElementById('checkoutButton').addEventListener('click', function () {
-    // Store the customization (image and T-shirt details) in local storage
+    // Save the current customization (image on the T-shirt) in local storage
     var canvasData = canvas.toDataURL();
     localStorage.setItem('tshirt-customization', canvasData);
 
