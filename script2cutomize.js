@@ -1,35 +1,28 @@
-document.getElementById('payButton').addEventListener('click', function(e) {
-    e.preventDefault();
+// Initialize Fabric.js canvas
+var canvas = new fabric.Canvas('tshirtCanvas');
 
-    // Collect shipping details
-    var name = document.getElementById('name').value;
-    var address = document.getElementById('address').value;
-    var phone = document.getElementById('phone').value;
-    var email = document.getElementById('email').value;
+// Handle the design upload and placement
+document.getElementById('uploadButton').addEventListener('click', function () {
+    var input = document.getElementById('uploadDesign');
+    if (input.files && input.files[0]) {
+        var reader = new FileReader();
+        reader.onload = function (e) {
+            // Load the uploaded image on the canvas
+            fabric.Image.fromURL(e.target.result, function (img) {
+                img.scale(0.5); // Resize the image
+                canvas.add(img); // Add image to the canvas
+            });
+        };
+        reader.readAsDataURL(input.files[0]);
+    }
+});
 
-    // Razorpay options for payment
-    var options = {
-        "key": "rzp_test_ibuaNsCnRcHdbx",  // Your Razorpay Test Key ID
-        "amount": 50000,  // Amount in paise (50000 paise = INR 500)
-        "currency": "INR",
-        "name": "Custom T-shirts Store",
-        "description": "T-shirt Purchase",
-        "image": "https://yourlogo.com/logo.png",  // Optional: Add your store logo
-        "handler": function (response) {
-            alert("Payment successful. Payment ID: " + response.razorpay_payment_id);
-            // You can save the payment details on the server here
-        },
-        "prefill": {
-            "name": name,
-            "email": email,
-            "contact": phone
-        },
-        "theme": {
-            "color": "#3399cc"
-        }
-    };
+// Proceed to checkout button functionality
+document.getElementById('checkoutButton').addEventListener('click', function () {
+    // Store the customization (image and T-shirt details) in local storage
+    var canvasData = canvas.toDataURL();
+    localStorage.setItem('tshirt-customization', canvasData);
 
-    // Open Razorpay Checkout
-    var rzp1 = new Razorpay(options);
-    rzp1.open();
+    // Redirect to checkout page
+    window.location.href = 'checkout.html';
 });
